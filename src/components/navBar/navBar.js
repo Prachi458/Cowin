@@ -8,6 +8,9 @@ import {
   ListItemText,
   Grid,
   Box,
+  Typography,
+  makeStyles,
+  Link,
 } from "@material-ui/core";
 import {
   VerifiedUserOutlined,
@@ -18,6 +21,17 @@ import {
 } from "@material-ui/icons";
 
 const NavBar = () => {
+  const useStyles = makeStyles({
+    heading: {
+      margin: "auto",
+      fontSize: "1.5rem",
+      fontWeight: 500,
+      marginTop: "10px",
+    },
+  });
+
+  const classes = useStyles();
+
   const navLinks = [
     {
       title: `Ministry of Health and Family Welfare`,
@@ -60,19 +74,15 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar className="nav">
           <Grid item>
-            <List
-              component="nav"
-              aria-labelledby="main navigation"
-              className="navBar"
-            >
+            <List component="nav" className="navBar">
               <img src="./images/logo1.png" className="logo1" alt="logo" />
               {navLinks.map(({ icon, title, path }) => (
-                <a href={path} key={title} className="linkText">
+                <Link href={path} key={title} color="inherit">
                   <ListItem button>
                     <ListItemText primary={icon} style={{ marginTop: "8px" }} />
                     <ListItemText primary={title} />
                   </ListItem>
-                </a>
+                </Link>
               ))}
             </List>
           </Grid>
@@ -89,14 +99,21 @@ const NavBar = () => {
         </Grid>
         <Grid item>
           <Box component="span" display="block" className="registerSignupBtn">
-            <a
+            <Link
               href="https://selfregistration.cowin.gov.in/"
+              style={{ color: "#001f60", textDecoration: "none" }}
               className="registerBtn"
             >
-              Register/ Sign In Yourself
-            </a>
+              Register/ Sign In yourself
+            </Link>
           </Box>
         </Grid>
+      </Grid>
+
+      <Grid item className={classes.heading}>
+        <Typography variant="h6">
+          <Box fontWeight="fontWeightBold">Helpline</Box>
+        </Typography>
       </Grid>
     </Grid>
   );
