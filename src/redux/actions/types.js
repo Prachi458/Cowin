@@ -1,0 +1,7 @@
+export const LOAD_STATES = "LOAD_STATES";
+export const LOAD_DISTRICTS = "LOAD_DISTRICTS";
+export const SELECTED_STATE = "SELECTED_STATE";
+export const FIND_BY_PIN = "FIND_BY_PIN";
+export const ENTERED_PIN = "ENTERED_PIN";
+export const FIND_BY_DISTRICT = "FIND_BY_DISTRICT";
+export const SELECTED_DISTRICT = "SELECTED_DISTRICT";

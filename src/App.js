@@ -7,6 +7,7 @@ import SearchVaccinationCenter from "./components/searchVaccinationCenter/search
 import HowItWorks from "./components/howItWorks/howItWorks";
 import Report from "./components/report/report";
 import OurPartners from "./components/partners/ourPartners";
+
 function App() {
   return (
     <Grid>

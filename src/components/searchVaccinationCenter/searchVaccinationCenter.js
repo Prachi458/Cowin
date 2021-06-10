@@ -1,43 +1,29 @@
 import React, { useState } from "react";
-import { Grid, Typography, makeStyles, Box, Button } from "@material-ui/core";
+import useStyles from "./styles";
+import { Grid, Typography, Box, Button } from "@material-ui/core";
 import "./searchVaccinationCenter.css";
 import SearchByPin from "./searchByPin";
+import { useDispatch } from "react-redux";
+import { fetchStatesData } from "../../redux/thunk/loadStates";
+import SearchByDistrict from "./searchByDistrict";
 
 const SearchVaccinationCenter = () => {
-  const useStyles = makeStyles({
-    heading: {
-      margin: "auto",
-      marginTop: "20px",
-      fontWeight: "bold",
-    },
-    searchBtn: {
-      whiteSpace: "nowrap",
-      borderRadius: " 41px",
-      color: "#414141",
-      fontWeight: "bold",
-      textTransform: "capitalize",
-      "&:hover": {
-        backgroundColor: "#002060",
-        color: "white",
-      },
-    },
-    btn: {
-      height: "48px",
-      padding: "0 24px",
-      cursor: "pointer",
-      boxSizing: "border-box",
-      opacity: "0.6",
-      minWidth: "160px",
-      textAlign: "center",
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
-      whiteSpace: "nowrap",
-      position: "relative",
-    },
-  });
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [searchByPin, setSearchByPin] = useState(false);
+  const [searchByDistrict, setSearchByDistrict] = useState(false);
+
+  const onSearchByState = () => {
+    setSearchByPin(true);
+    setSearchByDistrict(false);
+  };
+
+  const onSearchByDistrict = () => {
+    dispatch(fetchStatesData());
+    setSearchByPin(false);
+    setSearchByDistrict(true);
+  };
 
   return (
     <Grid container direction="column">
@@ -60,15 +46,15 @@ const SearchVaccinationCenter = () => {
         className="classes.btn"
       >
         <Button className={classes.searchBtn}>Search by Map</Button>
-        <Button
-          className={classes.searchBtn}
-          onClick={() => setSearchByPin(true)}
-        >
+        <Button className={classes.searchBtn} onClick={onSearchByState}>
           Search by Pin
         </Button>
-        <Button className={classes.searchBtn}>Search by District</Button>
+        <Button className={classes.searchBtn} onClick={onSearchByDistrict}>
+          Search by District
+        </Button>
       </Grid>
       {searchByPin ? <SearchByPin /> : null}
+      {searchByDistrict ? <SearchByDistrict /> : null}
     </Grid>
   );
 };
