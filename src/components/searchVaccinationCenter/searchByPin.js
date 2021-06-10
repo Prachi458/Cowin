@@ -1,46 +1,72 @@
 import React, { useState } from "react";
 import "./searchByPin.css";
-import { TextField, Button, Grid, makeStyles } from "@material-ui/core";
+import FilterButtons from "./filterButtons";
+import ShowDates from "./showDates";
+import useStyles from "./styles";
+import { TextField, Button, Grid } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCenterData } from "../../redux/thunk/findByPin";
+import { enteredPin } from "../../redux/actions";
+import Moment from "moment";
+import VaccinationData from "../showVaccinationData/vaccinationData";
 
 const SearchByPin = () => {
-  const useStyles = makeStyles({
-    textField: {
-      width: "30rem",
-      borderRadius: "10px",
-    },
-    button: {
-      margin: "3px 0 0 10px",
-      fontWeight: 700,
-      textTransform: "capitalize",
-      borderRadius: "5px",
-      background: "transparent",
-      border: "1px solid #002060",
-    },
-  });
-  const classes = useStyles();
   const [pin, setPin] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
+  const date1 = new Date();
+
+  const date = Moment(date1).format("DD-MM-YYYY");
+  const centerDetails = useSelector((state) => state.findByPin.centerDetails);
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
+  const submitHandler = (event) => {
+    dispatch(enteredPin(pin, date));
+    dispatch(fetchCenterData());
+    event.preventDefault();
+    setIsSubmit(true);
+  };
 
   return (
-    <Grid>
-      <form className="searchForm" autoComplete="off">
-        <TextField
-          error={pin === ""}
-          helperText={pin === "" ? "Please enter pincode" : " "}
-          type="number"
-          id="outlined-basic"
-          label="Enter your PIN"
-          variant="outlined"
-          size="small"
-          value={pin}
-          onChange={(e) => setPin(e.target.value)}
-          inputProps={{ maxLength: "6" }}
-          className={classes.textField}
-        />
+    <Grid container justify="center" direction="column">
+      <Grid item>
+        <form
+          className="searchForm"
+          autoComplete="off"
+          onSubmit={submitHandler}
+        >
+          <TextField
+            error={pin === ""}
+            helperText={pin === "" ? "Please enter six-digit pincode" : " "}
+            type="number"
+            id="outlined-basic"
+            label="Enter your PIN"
+            variant="outlined"
+            size="small"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            InputProps={{ maxLength: 6 }}
+            className={classes.textField}
+            required
+          />
 
-        <Button variant="outlined" size="small" className={classes.button}>
-          Search
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            variant="outlined"
+            size="small"
+            className={classes.button}
+          >
+            Search
+          </Button>
+        </form>
+      </Grid>
+
+      {isSubmit ? (
+        <Grid>
+          <FilterButtons /> <ShowDates />
+          <VaccinationData centerDetails={centerDetails} />
+        </Grid>
+      ) : null}
     </Grid>
   );
 };
