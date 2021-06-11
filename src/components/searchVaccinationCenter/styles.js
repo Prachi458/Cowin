@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     textTransform: "capitalize",
   },
+
   btn: {
     height: "48px",
     padding: "0 24px",
