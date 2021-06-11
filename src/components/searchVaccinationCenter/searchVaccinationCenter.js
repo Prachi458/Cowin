@@ -40,7 +40,6 @@ const SearchVaccinationCenter = () => {
           margin: "auto",
           border: "1px solid #414141",
           borderRadius: "51px",
-          width: "383px",
           marginTop: "20px",
         }}
         className="classes.btn"
