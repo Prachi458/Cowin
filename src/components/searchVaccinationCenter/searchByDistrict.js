@@ -7,9 +7,7 @@ import { selectedStates } from "../../redux/actions";
 import { selectedDistrict } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import FilterButtons from "./filterButtons";
-import ShowDates from "./showDates";
 import Moment from "moment";
-import VaccinationData from "../showVaccinationData/vaccinationData";
 
 const SearchByDistrict = () => {
   const [state, setState] = useState("Select State");
@@ -113,8 +111,7 @@ const SearchByDistrict = () => {
       </Grid>
       {isSubmit ? (
         <Grid>
-          <FilterButtons /> <ShowDates />
-          <VaccinationData centerDetails={centerDetails} />
+          <FilterButtons centerDetails={centerDetails} />
         </Grid>
       ) : null}
     </Grid>
