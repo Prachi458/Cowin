@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "./searchByPin.css";
 import FilterButtons from "./filterButtons";
-import ShowDates from "./showDates";
 import useStyles from "./styles";
 import { TextField, Button, Grid } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCenterData } from "../../redux/thunk/findByPin";
 import { enteredPin } from "../../redux/actions";
 import Moment from "moment";
-import VaccinationData from "../showVaccinationData/vaccinationData";
 
 const SearchByPin = () => {
   const [pin, setPin] = useState("");
@@ -17,6 +15,7 @@ const SearchByPin = () => {
 
   const date = Moment(date1).format("DD-MM-YYYY");
   const centerDetails = useSelector((state) => state.findByPin.centerDetails);
+
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -63,8 +62,7 @@ const SearchByPin = () => {
 
       {isSubmit ? (
         <Grid>
-          <FilterButtons /> <ShowDates />
-          <VaccinationData centerDetails={centerDetails} />
+          <FilterButtons centerDetails={centerDetails} />
         </Grid>
       ) : null}
     </Grid>

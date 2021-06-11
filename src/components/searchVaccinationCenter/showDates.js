@@ -1,18 +1,20 @@
 import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import React from "react";
 import { useSelector } from "react-redux";
+import Moment from "moment";
 import useStyles from "./styles";
 import { Grid, Typography, Button, Box } from "@material-ui/core";
 
 const ShowDates = () => {
+  const today = Moment();
   const dates = [
-    "10 Jun 2021",
-    "11 Jun 2021",
-    "12 Jun 2021",
-    "13 Jun 2021",
-    "14 Jun 2021",
-    "15 Jun 2021",
-    "16 Jun 2021",
+    Moment(today).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
+    Moment(today.add(1, "days")).format("DD MMM YYYY"),
   ];
 
   const classes = useStyles();
