@@ -11,10 +11,6 @@ const useStyles = makeStyles({
     color: "#414141",
     fontWeight: "bold",
     textTransform: "capitalize",
-    "&:hover": {
-      backgroundColor: "#002060",
-      color: "white",
-    },
   },
   btn: {
     height: "48px",

@@ -43,7 +43,7 @@ const HelpLine = () => {
 
       <Grid item>
         <img
-          src="images/mental_health.png"
+          src="images/mental_health.PNG"
           alt="health"
           className={classes.callImg}
         />
